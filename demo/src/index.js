@@ -1,14 +1,27 @@
-import React, {Component} from 'react'
-import {render} from 'react-dom'
+import React, { Component } from 'react'
+import { render } from 'react-dom'
 
-import Example from '../../src'
+import { IntlProvider, FormattedMessage } from '../../src'
+
+const messages = {
+  HELLO_WORLD: 'Hello, {name}!',
+};
+
+const locale = 'zh-Hant';
 
 class Demo extends Component {
   render() {
-    return <div>
-      <h1>react-i17n Demo</h1>
-      <Example/>
-    </div>
+    return (
+      <IntlProvider locale={locale} messages={messages}>
+        <FormattedMessage
+          id="HELLO_WORLD"
+          defaultMessage="Hello World!"
+          values={{
+            name: <span>Kai Hao</span>,
+          }}
+        />
+      </IntlProvider>
+    );
   }
 }
 
