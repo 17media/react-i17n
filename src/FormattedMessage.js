@@ -4,24 +4,24 @@ import { Consumer } from './IntlContext';
 
 const TOKEN_DELIMITER = generate();
 
-const FormattedMessage = ({ id, defaultMessage, values }) => {
-  const tokenizedValues = {};
+const FormattedMessage = ({ id, defaultMessage, values = {} }) => {
   const elements = new Map();
 
-  if (values && Object.keys(values).length > 0) {
-    Object.keys(values)
-      .forEach((key) => {
-        const value = values[key];
+  const tokenizedValues = Object.keys(values)
+    .reduce((obj, key) => {
+      let value = values[key];
 
-        if (isValidElement(value)) {
-          const token = generate();
-          tokenizedValues[key] = `${TOKEN_DELIMITER}${token}${TOKEN_DELIMITER}`;
-          elements.set(token, value);
-        } else {
-          tokenizedValues[key] = value;
-        }
-      });
-  }
+      if (isValidElement(value)) {
+        const token = generate();
+        elements.set(token, value);
+        value = token;
+      }
+
+      return {
+        ...obj,
+        [key]: value,
+      };
+    }, {});
 
   return (
     <Consumer>
@@ -31,7 +31,10 @@ const FormattedMessage = ({ id, defaultMessage, values }) => {
           values: tokenizedValues,
         });
 
-        const nodes = formattedMessage.split(TOKEN_DELIMITER)
+        const tokens = Array.from(elements.keys());
+        const tokensRegex = new RegExp(`(${tokens.join('|')})`, 'g');
+
+        const nodes = formattedMessage.split(tokensRegex)
           .filter(Boolean)
           .map(token => elements.has(token) ? elements.get(token) : token);
 
