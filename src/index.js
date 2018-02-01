@@ -5,3 +5,4 @@ export { default as FormattedNumber } from './FormattedNumber';
 export { default as FormattedDate } from './FormattedDate';
 export { default as injectIntl } from './injectIntl';
 export { Consumer as IntlConsumer } from './IntlContext';
+export { defineMessage, definesMessages } from './defineMessages';

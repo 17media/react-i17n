@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 
 import { IntlProvider, FormattedMessage, FormattedNumber, FormattedDate } from '../../src'
+import FormattedRelative from '../../src/FormattedRelative';
 
 const messages = {
   'en': {
@@ -78,6 +79,12 @@ class Demo extends Component {
               year="numeric"
               month="2-digit"
               day="2-digit"
+            />
+          </p>
+          <p>
+            <FormattedRelative
+              value={new Date()}
+              updateInterval={1000}
             />
           </p>
         </Blocker>

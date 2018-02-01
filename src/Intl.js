@@ -1,4 +1,7 @@
 import IntlMessageFormat from 'intl-messageformat';
+import IntlRelativeFormat from 'intl-relativeformat';
+
+const toDate = value => value instanceof global.Date ? value : new Date(value);
 
 class Intl {
   constructor(locale, messages) {
@@ -24,7 +27,7 @@ class Intl {
   }
 
   formatDate(value, options = {}) {
-    const date = value instanceof Date ? value : new Date(value)
+    const date = toDate(value);
     return new global.Intl.DateTimeFormat(this.locale, options).format(date);
   }
 
@@ -34,6 +37,12 @@ class Intl {
       minute: 'numeric',
       ...options,
     });
+  }
+
+  formatRelative(value, options = {}) {
+    const date = toDate(value);
+    const intlRelative = new IntlRelativeFormat(this.locale, options);
+    return intlRelative.format(date);
   }
 }
 
