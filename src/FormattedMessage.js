@@ -1,6 +1,7 @@
-import React, { isValidElement, createElement, Fragment } from 'react';
+import React, { isValidElement, createElement } from 'react';
 import { generate } from 'shortid';
 import { Consumer } from './IntlContext';
+import Aux from './Aux';
 
 const TOKEN_DELIMITER = generate();
 
@@ -26,19 +27,24 @@ const FormattedMessage = ({ id, defaultMessage, values = {} }) => {
   return (
     <Consumer>
       {(intl) => {
-        const formattedMessage = intl.formatMessage({
-          id,
+        const formattedMessage = intl.formatMessage(id, {
+          defaultMessage,
           values: tokenizedValues,
         });
 
         const tokens = Array.from(elements.keys());
+
+        if (!tokens.length) {
+          return formattedMessage;
+        }
+
         const tokensRegex = new RegExp(`(${tokens.join('|')})`, 'g');
 
         const nodes = formattedMessage.split(tokensRegex)
           .filter(Boolean)
           .map(token => elements.has(token) ? elements.get(token) : token);
 
-        return createElement(Fragment, null, ...nodes);
+        return createElement(Aux, null, ...nodes);
       }}
     </Consumer>
   );

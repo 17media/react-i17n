@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import createReactContext from 'create-react-context';
+import { createContext } from 'react-broadcast';
 
-const { Provider, Consumer } = createReactContext();
+const { Provider, Consumer } = createContext();
 
 export {
   Provider,

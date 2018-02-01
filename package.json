@@ -1,6 +1,6 @@
 {
   "name": "react-i17n",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "react-i17n React component",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -19,9 +19,10 @@
     "test:watch": "nwb test-react --server"
   },
   "dependencies": {
-    "create-react-context": "^0.1.4",
+    "intl-format-cache": "^2.1.0",
     "intl-messageformat": "^2.2.0",
     "prop-types": "^15.6.0",
+    "react-broadcast": "^0.7.0-rc.3",
     "shortid": "^2.2.8"
   },
   "peerDependencies": {
@@ -32,7 +33,7 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },
-  "author": "",
+  "author": "Kai Hao",
   "homepage": "",
   "license": "MIT",
   "repository": "",
