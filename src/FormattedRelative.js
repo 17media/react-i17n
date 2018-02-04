@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Consumer } from './IntlContext';
+import IntlConsumer from './IntlConsumer';
 
 const getUpdateTimeInterval = deltaTime => (
   [
@@ -56,14 +56,14 @@ class FormattedRelative extends PureComponent {
     const { value, children, updateInterval, ...props } = this.props;
 
     return (
-      <Consumer>
+      <IntlConsumer>
         {intl => {
           const formatted = intl.formatRelative(value, props);
           return typeof children === 'function'
             ? children(formatted)
             : formatted;
         }}
-      </Consumer>
+      </IntlConsumer>
     );
   }
 }

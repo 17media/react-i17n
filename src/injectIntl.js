@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import { Consumer } from './IntlContext';
+import IntlConsumer from './IntlConsumer';
 
 const injectIntl = WrappedComponent => class extends Component {
   static displayName = `injectIntl(${WrappedComponent.displayName || WrappedComponent.name || 'Component'})`;
 
   render() {
     return (
-      <Consumer>
-        {intl => (
-          <WrappedComponent intl={intl} />
+      <IntlConsumer>
+        {(intl, intlProps) => (
+          <WrappedComponent intl={intl} intlProps={intlProps} />
         )}
-      </Consumer>
+      </IntlConsumer>
     )
   }
 }

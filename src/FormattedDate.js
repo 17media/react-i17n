@@ -1,12 +1,12 @@
 import React, { PureComponent } from 'react';
-import { Consumer } from './IntlContext';
+import IntlConsumer from './IntlConsumer';
 
 const FormattedDate = ({ value, ...props }) => (
-  <Consumer>
+  <IntlConsumer>
     {intl => (
       intl.formatDate(value, props)
     )}
-  </Consumer>
+  </IntlConsumer>
 )
 
 export default FormattedDate;

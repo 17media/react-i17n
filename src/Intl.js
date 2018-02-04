@@ -16,6 +16,10 @@ class Intl {
       const intlMessage = new IntlMessageFormat(this.messages[this.locale][id], this.locale);
       message = intlMessage.format(values);
     } catch (err) {
+      if (!defaultMessage) {
+        return null;
+      }
+
       message = new IntlMessageFormat(defaultMessage, this.locale).format(values);
     }
 

@@ -13,11 +13,14 @@ import zhHantLocaleData from '../../src/locale-data/zh-Hant';
 
 addLocaleData(zhHantLocaleData);
 
-const messages = {
+const defaultMessages = {
   'en': {
     'hello.world': 'Hello, {name}!',
     'dailyjack.elevator': 'When {name} is being locked up in the elevator, it\'s actually us being locked up outside of the elevator.',
   },
+};
+
+const zhMessages = {
   'zh-Hant': {
     'hello.world': '嗨，{name}！',
     'dailyjack.elevator': '當 {name} 被關在電梯裡面，實際上是我們所有人被關在電梯外面。',
@@ -42,7 +45,19 @@ class Demo extends Component {
 
     this.state = {
       locale: DEFAULT_LOCALE,
+      messages: defaultMessages,
     };
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState(({ messages }) => ({
+        messages: {
+          ...messages,
+          ...zhMessages,
+        },
+      }));
+    }, 1000);
   }
 
   handleSwitchLocale = (e) => {
@@ -52,7 +67,7 @@ class Demo extends Component {
   }
 
   render() {
-    const { locale } = this.state;
+    const { locale, messages } = this.state;
 
     return (
       <IntlProvider locale={locale} messages={messages}>

@@ -1,6 +1,6 @@
 import React, { isValidElement, createElement } from 'react';
 import { generate } from 'shortid';
-import { Consumer } from './IntlContext';
+import IntlConsumer from './IntlConsumer';
 import Aux from './Aux';
 
 const TOKEN_DELIMITER = generate();
@@ -25,12 +25,17 @@ const FormattedMessage = ({ id, defaultMessage, values = {} }) => {
     }, {});
 
   return (
-    <Consumer>
-      {(intl) => {
+    <IntlConsumer>
+      {(intl, { isTimeout }) => {
         const formattedMessage = intl.formatMessage(id, {
-          defaultMessage,
+          defaultMessage: isTimeout && defaultMessage,
           values: tokenizedValues,
         });
+
+        // return null early for Formatted to catch and show loading
+        if (!formattedMessage) {
+          return null;
+        }
 
         const tokens = Array.from(elements.keys());
 
@@ -46,7 +51,7 @@ const FormattedMessage = ({ id, defaultMessage, values = {} }) => {
 
         return createElement(Aux, null, ...nodes);
       }}
-    </Consumer>
+    </IntlConsumer>
   );
 };
 

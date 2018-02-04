@@ -1,12 +1,12 @@
 import React, { PureComponent } from 'react';
-import { Consumer } from './IntlContext';
+import IntlConsumer from './IntlConsumer';
 
 const FormattedTime = ({ value, ...props }) => (
-  <Consumer>
+  <IntlConsumer>
     {intl => (
       intl.formatTime(value, props)
     )}
-  </Consumer>
+  </IntlConsumer>
 )
 
 export default FormattedTime;

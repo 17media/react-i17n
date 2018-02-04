@@ -5,6 +5,6 @@ export { default as FormattedNumber } from './FormattedNumber';
 export { default as FormattedDate } from './FormattedDate';
 export { default as FormattedRelative } from './FormattedRelative';
 export { default as injectIntl } from './injectIntl';
-export { Consumer as IntlConsumer } from './IntlContext';
+export { default as IntlConsumer } from './IntlConsumer';
 export { defineMessage, definesMessages } from './defineMessages';
 export { addLocaleData } from './addLocaleData';
