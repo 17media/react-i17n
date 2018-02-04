@@ -12,18 +12,24 @@
   ],
   "scripts": {
     "build": "nwb build-react-component",
+    "build-locale": "node scripts/build-locale",
     "clean": "nwb clean-module && nwb clean-demo",
     "start": "nwb serve-react-demo",
     "test": "nwb test-react",
     "test:coverage": "nwb test-react --coverage",
-    "test:watch": "nwb test-react --server"
+    "test:watch": "nwb test-react --server",
+    "prepublish": "npm run build-locale && npm run build"
   },
   "dependencies": {
+    "formatjs-extract-cldr-data": "4.1.0",
     "intl-format-cache": "^2.1.0",
     "intl-messageformat": "^2.2.0",
     "intl-relativeformat": "^2.1.0",
+    "mkdirp": "~0.5.1",
     "prop-types": "^15.6.0",
     "react-broadcast": "^0.7.0-rc.3",
+    "rimraf": "~2.6.2",
+    "serialize-javascript": "~1.4.0",
     "shortid": "^2.2.8"
   },
   "peerDependencies": {

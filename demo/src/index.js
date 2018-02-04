@@ -1,8 +1,17 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 
-import { IntlProvider, FormattedMessage, FormattedNumber, FormattedDate } from '../../src'
-import FormattedRelative from '../../src/FormattedRelative';
+import {
+  IntlProvider,
+  FormattedMessage,
+  FormattedNumber,
+  FormattedDate,
+  FormattedRelative,
+  addLocaleData,
+} from '../../src'
+import zhHantLocaleData from '../../src/locale-data/zh-Hant';
+
+addLocaleData(zhHantLocaleData);
 
 const messages = {
   'en': {
