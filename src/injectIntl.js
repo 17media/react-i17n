@@ -8,7 +8,11 @@ const injectIntl = WrappedComponent => class extends Component {
     return (
       <IntlConsumer>
         {(intl, intlProps) => (
-          <WrappedComponent intl={intl} intlProps={intlProps} />
+          <WrappedComponent
+            intl={intl}
+            intlProps={intlProps}
+            {...this.props}
+          />
         )}
       </IntlConsumer>
     )
