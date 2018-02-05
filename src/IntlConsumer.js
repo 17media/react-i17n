@@ -1,18 +1,22 @@
 import React, { PureComponent } from 'react';
 import { Consumer } from './IntlContext';
 
-const IntlConsumer = ({ fallbackMessage, children, ...props }) => (
+const IntlConsumer = ({ fallbackMessage, children }) => (
   <Consumer>
-    {({ intl, isTimeout }) => {
-      const formatted = children(intl, {
+    {({ intl, isTimeout, WrappedComponent }) => {
+      let formatted = children(intl, {
         isTimeout,
       });
 
       if (formatted == null && isTimeout) {
-        return fallbackMessage;
+        formatted = fallbackMessage;
       }
 
-      return formatted;
+      return WrappedComponent
+        ? (
+          <WrappedComponent>{formatted}</WrappedComponent>
+        )
+        : formatted;
     }}
   </Consumer>
 );
