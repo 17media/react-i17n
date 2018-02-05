@@ -27,10 +27,10 @@ const FormattedMessage = ({ id, defaultMessage, values = {} }) => {
   return (
     <IntlConsumer>
       {(intl, { isTimeout }) => {
-        const formattedMessage = intl.formatMessage(id, {
+        const formattedMessage = intl.formatMessage({
+          id,
           defaultMessage: isTimeout && defaultMessage,
-          values: tokenizedValues,
-        });
+        }, tokenizedValues);
 
         // return null early for Formatted to catch and show loading
         if (!formattedMessage) {

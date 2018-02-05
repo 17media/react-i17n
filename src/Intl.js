@@ -9,7 +9,7 @@ class Intl {
     this.messages = messages;
   }
 
-  formatMessage(id, { defaultMessage, values = {} } = {} ) {
+  formatMessage = ({ id, defaultMessage }, values = {}) => {
     let message;
 
     try {
@@ -26,16 +26,16 @@ class Intl {
     return message;
   }
 
-  formatNumber(value, options = {}) {
+  formatNumber = (value, options = {}) => {
     return new global.Intl.NumberFormat(this.locale, options).format(value);
   }
 
-  formatDate(value, options = {}) {
+  formatDate = (value, options = {}) => {
     const date = toDate(value);
     return new global.Intl.DateTimeFormat(this.locale, options).format(date);
   }
 
-  formatTime(value, options = {}) {
+  formatTime = (value, options = {}) => {
     return this.formatDate(value, {
       hour: 'numeric',
       minute: 'numeric',
@@ -43,7 +43,7 @@ class Intl {
     });
   }
 
-  formatRelative(value, options = {}) {
+  formatRelative = (value, options = {}) => {
     const date = toDate(value);
     const intlRelative = new IntlRelativeFormat(this.locale, options);
     return intlRelative.format(date);
