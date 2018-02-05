@@ -1,11 +1,10 @@
 {
   "name": "react-i17n",
   "version": "0.1.0",
-  "description": "react-i17n React component",
+  "description": "A react-intl alternative i18n library for react 16",
   "main": "lib/index.js",
   "module": "es/index.js",
   "files": [
-    "css",
     "es",
     "lib",
     "umd"
@@ -21,30 +20,33 @@
     "prepublish": "npm run build-locale && npm run build"
   },
   "dependencies": {
-    "formatjs-extract-cldr-data": "4.1.0",
     "intl-format-cache": "^2.1.0",
     "intl-messageformat": "^2.2.0",
     "intl-relativeformat": "^2.1.0",
-    "mkdirp": "~0.5.1",
     "prop-types": "^15.6.0",
     "react-broadcast": "^0.7.0-rc.3",
-    "rimraf": "~2.6.2",
-    "serialize-javascript": "~1.4.0",
     "shortid": "^2.2.8"
   },
   "peerDependencies": {
     "react": "16.x"
   },
   "devDependencies": {
+    "formatjs-extract-cldr-data": "4.1.0",
+    "mkdirp": "~0.5.1",
     "nwb": "0.21.x",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "rimraf": "~2.6.2",
+    "serialize-javascript": "~1.4.0"
   },
   "author": "Kai Hao",
-  "homepage": "",
+  "homepage": "https://github.com/17media/react-i17n",
   "license": "MIT",
   "repository": "",
   "keywords": [
-    "react-component"
+    "react 16",
+    "react-intl",
+    "intl",
+    "i18n"
   ]
 }
