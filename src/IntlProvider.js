@@ -1,10 +1,10 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import IntlMessageFormat from 'intl-messageformat';
 import Aux from './Aux';
 import Intl from './Intl';
 import { Provider } from './IntlContext';
 
-class IntlProvider extends PureComponent {
+class IntlProvider extends Component {
   static defaultProps = {
     loadingTimeout: 500, // 500 ms of blank instead of fallback message
     WrappedComponent: null, // default to not render the wrapper element
@@ -14,7 +14,7 @@ class IntlProvider extends PureComponent {
     super(props);
 
     this.state = {
-      isTimeout: false,
+      isTimeout: !props.loadingTimeout,
     };
   }
 
@@ -22,26 +22,20 @@ class IntlProvider extends PureComponent {
     this.setTimeout();
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      isTimeout: false,
-    }, () => {
-      this.setTimeout();
-    });
-  }
-
   setTimeout = () => {
-    this.timeout = global.setTimeout(() => {
-      this.setState({
-        isTimeout: true,
-      });
-    }, this.props.loadingTimeout);
+    if (!this.state.isTimeout) {
+      this.timeout = global.setTimeout(() => {
+        this.setState({
+          isTimeout: true,
+        });
+      }, this.props.loadingTimeout);
+    }
   }
 
   render() {
     const { locale, messages, WrappedComponent, children } = this.props;
-    const intl = new Intl(locale, messages);
     const { isTimeout } = this.state;
+    const intl = new Intl(locale, messages);
 
     const context = {
       intl,

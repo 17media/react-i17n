@@ -1,11 +1,12 @@
 import React, { PureComponent } from 'react';
 import IntlConsumer from './IntlConsumer';
 
-const FormattedTime = ({ value, ...props }) => (
+const FormattedTime = ({ value, WrappedComponent, ...props }) => (
   <IntlConsumer>
-    {intl => (
-      intl.formatTime(value, props)
-    )}
+    {intl => ({
+      WrappedComponent,
+      children: intl.formatTime(value, props),
+    })}
   </IntlConsumer>
 )
 

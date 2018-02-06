@@ -1,22 +1,33 @@
-import React, { PureComponent } from 'react';
+import React, { createElement } from 'react';
+import Aux from './Aux';
 import { Consumer } from './IntlContext';
 
-const IntlConsumer = ({ fallbackMessage, children }) => (
+const IntlConsumer = ({ children }) => (
   <Consumer>
-    {({ intl, isTimeout, WrappedComponent }) => {
-      let formatted = children(intl, {
-        isTimeout,
-      });
+    {({ intl, isTimeout, WrappedComponent: defaultWrappedComponent }) => {
+      const formatted = children(intl);
+      let renderedChildren = formatted.children;
 
-      if (formatted == null && isTimeout) {
-        formatted = fallbackMessage;
+      // not yet timeout, show null when loading
+      if (formatted.isFallback && !isTimeout) {
+        renderedChildren = null;
       }
 
-      return WrappedComponent
-        ? (
-          <WrappedComponent>{formatted}</WrappedComponent>
-        )
-        : formatted;
+      const WrappedComponent = typeof formatted.WrappedComponent !== 'undefined'
+        ? formatted.WrappedComponent
+        : defaultWrappedComponent;
+
+      if (WrappedComponent) {
+        return (
+          <WrappedComponent>
+            {renderedChildren}
+          </WrappedComponent>
+        );
+      } else if (Array.isArray(renderedChildren)) {
+        return createElement(Aux, null, ...renderedChildren);
+      }
+
+      return renderedChildren;
     }}
   </Consumer>
 );

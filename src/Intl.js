@@ -9,21 +9,19 @@ class Intl {
     this.messages = messages;
   }
 
-  formatMessage = ({ id, defaultMessage }, values = {}) => {
-    let message;
+  shouldUseFallback = (id) => {
+    return !(this.messages[this.locale] && this.messages[this.locale][id]);
+  }
 
-    try {
-      const intlMessage = new IntlMessageFormat(this.messages[this.locale][id], this.locale);
-      message = intlMessage.format(values);
-    } catch (err) {
-      if (!defaultMessage) {
-        return null;
-      }
-
-      message = new IntlMessageFormat(defaultMessage, this.locale).format(values);
+  formatMessage = ({ id, defaultMessage = '' }, values = {}) => {
+    if (this.shouldUseFallback(id)) {
+      // no message found and fallback to default message
+      return new IntlMessageFormat(defaultMessage, this.locale).format(values);
     }
 
-    return message;
+    // message found, format and return
+    const intlMessage = new IntlMessageFormat(this.messages[this.locale][id], this.locale);
+    return intlMessage.format(values);
   }
 
   formatNumber = (value, options = {}) => {

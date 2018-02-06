@@ -75,7 +75,6 @@ class Demo extends Component {
           <h1>
             <FormattedMessage
               id="hello.world"
-              defaultMessage="Hello World!"
               values={{
                 name: 'Jack',
               }}

@@ -3,9 +3,7 @@ import { generate } from 'shortid';
 import IntlConsumer from './IntlConsumer';
 import Aux from './Aux';
 
-const TOKEN_DELIMITER = generate();
-
-const FormattedMessage = ({ id, defaultMessage, values = {} }) => {
+const FormattedMessage = ({ id, defaultMessage, values = {}, WrappedComponent, ...props }) => {
   const elements = new Map();
 
   const tokenizedValues = Object.keys(values)
@@ -26,30 +24,33 @@ const FormattedMessage = ({ id, defaultMessage, values = {} }) => {
 
   return (
     <IntlConsumer>
-      {(intl, { isTimeout }) => {
-        const formattedMessage = intl.formatMessage({
-          id,
-          defaultMessage: isTimeout && defaultMessage,
-        }, tokenizedValues);
-
-        // return null early for Formatted to catch and show loading
-        if (!formattedMessage) {
-          return null;
-        }
+      {(intl) => {
+        const formatted = {
+          isFallback: intl.shouldUseFallback(id),
+          WrappedComponent,
+          children: intl.formatMessage(
+            {
+              id,
+              defaultMessage,
+            },
+            tokenizedValues
+          ),
+        };
 
         const tokens = Array.from(elements.keys());
 
+        // no react elements found in values, return simple string
         if (!tokens.length) {
-          return formattedMessage;
+          return formatted;
         }
 
         const tokensRegex = new RegExp(`(${tokens.join('|')})`, 'g');
 
-        const nodes = formattedMessage.split(tokensRegex)
+        formatted.children = formatted.children.split(tokensRegex)
           .filter(Boolean)
           .map(token => elements.has(token) ? elements.get(token) : token);
 
-        return createElement(Aux, null, ...nodes);
+        return formatted;
       }}
     </IntlConsumer>
   );

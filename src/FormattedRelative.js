@@ -53,16 +53,14 @@ class FormattedRelative extends PureComponent {
   }
 
   render() {
-    const { value, children, updateInterval, ...props } = this.props;
+    const { value, children, updateInterval, WrappedComponent, ...props } = this.props;
 
     return (
       <IntlConsumer>
-        {intl => {
-          const formatted = intl.formatRelative(value, props);
-          return typeof children === 'function'
-            ? children(formatted)
-            : formatted;
-        }}
+        {intl => ({
+          WrappedComponent,
+          children: intl.formatRelative(value, props),
+        })}
       </IntlConsumer>
     );
   }
