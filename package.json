@@ -24,7 +24,7 @@
     "intl-messageformat": "^2.2.0",
     "intl-relativeformat": "^2.1.0",
     "prop-types": "^15.6.0",
-    "react-broadcast": "0.7.0-rc.3",
+    "react-broadcast": "0.7.0-rc.4",
     "shortid": "^2.2.8"
   },
   "peerDependencies": {
