@@ -12,6 +12,7 @@
   "scripts": {
     "build": "nwb build-react-component",
     "build-locale": "node scripts/build-locale",
+    "postbuild": "npm run test:bundlesize",
     "clean": "nwb clean-module && nwb clean-demo",
     "start": "nwb serve-react-demo",
     "test": "nwb test-react",
