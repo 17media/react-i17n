@@ -1,7 +1,8 @@
 import React, { isValidElement, createElement } from 'react';
-import { generate } from 'shortid';
 import IntlConsumer from './IntlConsumer';
 import Aux from './Aux';
+
+const getRandomID = () => Math.floor(Math.random() * 0x10000000000).toString(16);
 
 const FormattedMessage = ({ id, defaultMessage, values = {}, WrappedComponent, ...props }) => {
   const elements = new Map();
@@ -11,7 +12,7 @@ const FormattedMessage = ({ id, defaultMessage, values = {}, WrappedComponent, .
       let value = values[key];
 
       if (isValidElement(value)) {
-        const token = generate();
+        const token = getRandomID();
         elements.set(token, value);
         value = token;
       }
