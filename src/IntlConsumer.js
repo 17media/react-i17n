@@ -6,7 +6,9 @@ const IntlConsumer = ({ children }) => (
   <Consumer>
     {({ intl, isTimeout, WrappedComponent: defaultWrappedComponent }) => {
       const formatted = children(intl);
-      let renderedChildren = formatted.children;
+      let renderedChildren = Array.isArray(formatted.children)
+        ? createElement(Aux, null, ...formatted.children)
+        : formatted.children;
 
       // not yet timeout, show null when loading
       if (formatted.isFallback && !isTimeout) {
@@ -23,8 +25,6 @@ const IntlConsumer = ({ children }) => (
             {renderedChildren}
           </WrappedComponent>
         );
-      } else if (Array.isArray(renderedChildren)) {
-        return createElement(Aux, null, ...renderedChildren);
       }
 
       return renderedChildren;
