@@ -8,6 +8,6 @@ const FormattedDate = ({ value, WrappedComponent, ...props }) => (
       children: intl.formatDate(value, props),
     })}
   </IntlConsumer>
-)
+);
 
 export default FormattedDate;

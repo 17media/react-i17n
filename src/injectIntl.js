@@ -1,24 +1,22 @@
 import React, { Component } from 'react';
 import IntlConsumer from './IntlConsumer';
 
-const injectIntl = WrappedComponent => class extends Component {
-  static displayName = `InjectIntl(${WrappedComponent.displayName || WrappedComponent.name || 'Component'})`;
+const injectIntl = WrappedComponent =>
+  class extends Component {
+    static displayName = `InjectIntl(${WrappedComponent.displayName ||
+      WrappedComponent.name ||
+      'Component'})`;
 
-  render() {
-    return (
-      <IntlConsumer>
-        {intl => ({
-          WrappedComponent: null,
-          children: (
-            <WrappedComponent
-              intl={intl}
-              {...this.props}
-            />
-          ),
-        })}
-      </IntlConsumer>
-    )
-  }
-}
+    render() {
+      return (
+        <IntlConsumer>
+          {intl => ({
+            WrappedComponent: null,
+            children: <WrappedComponent intl={intl} {...this.props} />,
+          })}
+        </IntlConsumer>
+      );
+    }
+  };
 
-export default injectIntl
+export default injectIntl;

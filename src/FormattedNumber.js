@@ -8,6 +8,6 @@ const FormattedNumber = ({ value, WrappedComponent, ...props }) => (
       children: intl.formatNumber(value, props),
     })}
   </IntlConsumer>
-)
+);
 
 export default FormattedNumber;

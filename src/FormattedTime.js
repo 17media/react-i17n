@@ -8,6 +8,6 @@ const FormattedTime = ({ value, WrappedComponent, ...props }) => (
       children: intl.formatTime(value, props),
     })}
   </IntlConsumer>
-)
+);
 
 export default FormattedTime;

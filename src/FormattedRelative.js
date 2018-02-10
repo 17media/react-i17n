@@ -1,16 +1,13 @@
 import React, { PureComponent } from 'react';
 import IntlConsumer from './IntlConsumer';
 
-const getUpdateTimeInterval = deltaTime => (
+const getUpdateTimeInterval = deltaTime =>
   [
     24 * 60 * 60 * 1000, // day
     60 * 60 * 1000, // hour
     60 * 1000, // minute
     1000, // second
-  ]
-    .find(updateTime => deltaTime > updateTime)
-    || 1000
-);
+  ].find(updateTime => deltaTime > updateTime) || 1000;
 
 class FormattedRelative extends PureComponent {
   static defaultProps = {
@@ -38,22 +35,25 @@ class FormattedRelative extends PureComponent {
     if (this.interval) {
       global.clearTimeout(this.interval);
     }
-  }
+  };
 
-  setInterval = (updateInterval) => {
-    this.interval = global.setTimeout(
-      () => {
-        this.forceUpdate();
+  setInterval = updateInterval => {
+    this.interval = global.setTimeout(() => {
+      this.forceUpdate();
 
-        this.clearInterval();
-        this.setInterval(this.props.updateInterval)
-      },
-      Math.max(getUpdateTimeInterval(Date.now() - this.dateTime), updateInterval)
-    );
-  }
+      this.clearInterval();
+      this.setInterval(this.props.updateInterval);
+    }, Math.max(getUpdateTimeInterval(Date.now() - this.dateTime), updateInterval));
+  };
 
   render() {
-    const { value, children, updateInterval, WrappedComponent, ...props } = this.props;
+    const {
+      value,
+      children,
+      updateInterval,
+      WrappedComponent,
+      ...props
+    } = this.props;
 
     return (
       <IntlConsumer>

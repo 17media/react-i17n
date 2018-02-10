@@ -15,16 +15,13 @@ const IntlConsumer = ({ children }) => (
         renderedChildren = null;
       }
 
-      const WrappedComponent = typeof formatted.WrappedComponent !== 'undefined'
-        ? formatted.WrappedComponent
-        : defaultWrappedComponent;
+      const WrappedComponent =
+        typeof formatted.WrappedComponent !== 'undefined'
+          ? formatted.WrappedComponent
+          : defaultWrappedComponent;
 
       if (WrappedComponent) {
-        return (
-          <WrappedComponent>
-            {renderedChildren}
-          </WrappedComponent>
-        );
+        return <WrappedComponent>{renderedChildren}</WrappedComponent>;
       }
 
       return renderedChildren;
