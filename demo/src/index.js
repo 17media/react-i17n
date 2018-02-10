@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { render } from 'react-dom'
+import React, { Component } from 'react';
+import { render } from 'react-dom';
 
 import {
   IntlProvider,
@@ -8,22 +8,25 @@ import {
   FormattedDate,
   FormattedRelative,
   addLocaleData,
-} from '../../src'
+} from '../../src';
 import zhHantLocaleData from '../../src/locale-data/zh-Hant';
 
 addLocaleData(zhHantLocaleData);
 
 const defaultMessages = {
-  'en': {
+  en: {
     'hello.world': 'Hello, {name}!',
-    'dailyjack.elevator': 'When {name} is being locked up in the elevator, it\'s actually us being locked up outside of the elevator.',
+    'dailyjack.elevator':
+      "When {name} is being locked up in the elevator, it's actually us being locked up outside of the elevator.",
+    'no-default-message': 'Default locale message',
   },
 };
 
 const zhMessages = {
   'zh-Hant': {
     'hello.world': '嗨，{name}！',
-    'dailyjack.elevator': '當 {name} 被關在電梯裡面，實際上是我們所有人被關在電梯外面。',
+    'dailyjack.elevator':
+      '當 {name} 被關在電梯裡面，實際上是我們所有人被關在電梯外面。',
   },
 };
 
@@ -60,17 +63,17 @@ class Demo extends Component {
     }, 1000);
   }
 
-  handleSwitchLocale = (e) => {
+  handleSwitchLocale = e => {
     this.setState({
       locale: e.target.value,
     });
-  }
+  };
 
   render() {
     const { locale, messages } = this.state;
 
     return (
-      <IntlProvider locale={locale} messages={messages}>
+      <IntlProvider locale={locale} messages={messages} defaultLocale="en">
         <Blocker>
           <h1>
             <FormattedMessage
@@ -85,16 +88,12 @@ class Demo extends Component {
               id="dailyjack.elevator"
               defaultMessage="當 {name} 被關在電梯裡面，實際上是我們所有人被關在電梯外面。"
               values={{
-                name: <b>Jack</b>
+                name: <b>Jack</b>,
               }}
             />
           </p>
           <p>
-            <FormattedNumber
-              value={12345}
-              style="currency"
-              currency="TWD"
-            />
+            <FormattedNumber value={12345} style="currency" currency="TWD" />
           </p>
           <p>
             <FormattedDate
@@ -105,15 +104,17 @@ class Demo extends Component {
             />
           </p>
           <p>
-            <FormattedRelative
-              value={new Date()}
-              updateInterval={1000}
-            />
+            <FormattedRelative value={new Date()} updateInterval={1000} />
+          </p>
+          <p>
+            <FormattedMessage id="no-default-message" />
           </p>
         </Blocker>
         <select value={locale} onChange={this.handleSwitchLocale}>
           {Object.keys(messages).map(lang => (
-            <option key={lang} value={lang}>{lang}</option>
+            <option key={lang} value={lang}>
+              {lang}
+            </option>
           ))}
         </select>
       </IntlProvider>
@@ -121,4 +122,4 @@ class Demo extends Component {
   }
 }
 
-render(<Demo/>, document.querySelector('#demo'))
+render(<Demo />, document.querySelector('#demo'));

@@ -24,7 +24,7 @@
   },
   "lint-staged": {
     "*.js": [
-      "prettier"
+      "prettier --config .prettierrc --write"
     ]
   },
   "dependencies": {

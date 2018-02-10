@@ -41,9 +41,17 @@ class IntlProvider extends Component<IntlProviderProps, State> {
   };
 
   render() {
-    const { locale, messages, WrappedComponent, children } = this.props;
+    const {
+      locale,
+      messages,
+      defaultLocale,
+      WrappedComponent,
+      children,
+    } = this.props;
     const { isTimeout } = this.state;
-    const intl = new Intl(locale, messages);
+    const intl = new Intl(locale, messages, {
+      defaultLocale,
+    });
 
     const context = {
       intl,
