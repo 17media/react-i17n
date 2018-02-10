@@ -6,25 +6,22 @@ const getRandomID = () => Math.floor(Math.random() * 0x10000000000).toString(16)
 
 const FormattedMessage = ({ id, defaultMessage, values, WrappedComponent, ...props }) => {
   const elements = new Map();
-  let tokenizedValues;
 
-  if (values && Object.keys(values).length) {
-    tokenizedValues = Object.keys(values)
-      .reduce((obj, key) => {
-        let value = values[key];
+  const tokenizedValues = Object.keys(values)
+    .reduce((obj, key) => {
+      let value = values[key];
 
-        if (isValidElement(value)) {
-          const token = getRandomID();
-          elements.set(token, value);
-          value = token;
-        }
+      if (isValidElement(value)) {
+        const token = getRandomID();
+        elements.set(token, value);
+        value = token;
+      }
 
-        return {
-          ...obj,
-          [key]: value,
-        };
-      }, {});
-  }
+      return {
+        ...obj,
+        [key]: value,
+      };
+    }, {});
 
   return (
     <IntlConsumer>
@@ -58,6 +55,10 @@ const FormattedMessage = ({ id, defaultMessage, values, WrappedComponent, ...pro
       }}
     </IntlConsumer>
   );
+};
+
+FormattedMessage.defaultProps = {
+  values: {},
 };
 
 export default FormattedMessage;

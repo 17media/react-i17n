@@ -9,3 +9,4 @@ export injectIntl from './injectIntl';
 export IntlConsumer from './IntlConsumer';
 export { defineMessage, defineMessages } from './defineMessages';
 export { addLocaleData } from './addLocaleData';
+export { intlShape, contextShape } from './intlShape';
