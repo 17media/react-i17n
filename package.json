@@ -19,7 +19,13 @@
     "test:bundlesize": "bundlesize",
     "test:coverage": "nwb test-react --coverage",
     "test:watch": "nwb test-react --server",
-    "prepare": "npm run build-locale && npm run build"
+    "prepare": "npm run build-locale && npm run build",
+    "precommit": "lint-staged && flow"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier"
+    ]
   },
   "dependencies": {
     "intl-format-cache": "^2.1.0",
@@ -32,10 +38,15 @@
     "react": "16.x"
   },
   "devDependencies": {
+    "babel-preset-flow": "~6.23.0",
     "bundlesize": "~0.16.0",
+    "flow-bin": "~0.65.0",
     "formatjs-extract-cldr-data": "4.1.0",
+    "husky": "~0.14.3",
+    "lint-staged": "~6.1.0",
     "mkdirp": "~0.5.1",
     "nwb": "0.21.x",
+    "prettier": "1.10.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "rimraf": "~2.6.2",

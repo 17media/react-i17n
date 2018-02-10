@@ -1,16 +1,24 @@
+// @flow
 import React, { Component } from 'react';
 import IntlMessageFormat from 'intl-messageformat';
 import Aux from './Aux';
 import Intl from './Intl';
 import { Provider } from './IntlContext';
+import type { IntlProviderProps } from './types';
 
-class IntlProvider extends Component {
+type State = {
+  isTimeout: boolean,
+};
+
+class IntlProvider extends Component<IntlProviderProps, State> {
+  timeout: ?number;
+
   static defaultProps = {
     loadingTimeout: 500, // 500 ms of blank instead of fallback message
     WrappedComponent: null, // default to not render the wrapper element
   };
 
-  constructor(props) {
+  constructor(props: IntlProviderProps) {
     super(props);
 
     this.state = {
@@ -30,7 +38,7 @@ class IntlProvider extends Component {
         });
       }, this.props.loadingTimeout);
     }
-  }
+  };
 
   render() {
     const { locale, messages, WrappedComponent, children } = this.props;
@@ -43,11 +51,7 @@ class IntlProvider extends Component {
       WrappedComponent,
     };
 
-    return (
-      <Provider value={context}>
-        {children}
-      </Provider>
-    );
+    return <Provider value={context}>{children}</Provider>;
   }
 }
 
