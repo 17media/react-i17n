@@ -27,6 +27,7 @@ const zhMessages = {
     'hello.world': '嗨，{name}！',
     'dailyjack.elevator':
       '當 {name} 被關在電梯裡面，實際上是我們所有人被關在電梯外面。',
+    'no-default-message': 'Message',
   },
 };
 
@@ -109,6 +110,16 @@ class Demo extends Component {
           <p>
             <FormattedMessage id="no-default-message" />
           </p>
+          <IntlProvider locale="en" messages={messages} defaultLocale="en">
+            <p>
+              <FormattedMessage
+                id="hello.world"
+                values={{
+                  name: 'Jack',
+                }}
+              />
+            </p>
+          </IntlProvider>
         </Blocker>
         <select value={locale} onChange={this.handleSwitchLocale}>
           {Object.keys(messages).map(lang => (
