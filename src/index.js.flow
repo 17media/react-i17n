@@ -1,0 +1,42 @@
+// @flow
+import type { ComponentType, Node } from 'react';
+import type IntlMessageFormat from 'intl-messageformat';
+import type IntlRelativeFormat from 'intl-relativeformat';
+
+declare module 'react-i17n' {
+  declare type Locale = string;
+
+  declare type LocaleMessages = {
+    [id: string]: string | LocaleMessages,
+  };
+
+  declare type Messages = { [locale: Locale]: LocaleMessages };
+
+  declare type IntlOptions = {
+    defaultLocale?: Locale,
+  };
+
+  declare export var IntlFormatters: {
+    getDateTimeFormat: global.Intl.DateTimeFormat,
+    getNumberFormat: global.Intl.NumberFormat,
+    getMessageFormat: IntlMessageFormat,
+    getRelativeFormat: IntlRelativeFormat,
+  };
+
+  declare export var IntlProviderProps: {
+    locale: Locale,
+    messages: Messages,
+    loadingTimeout: number,
+    WrappedComponent: ?ComponentType<*>,
+    children: ?Node,
+  } & IntlOptions;
+
+  declare export var FormattedMessageValues: {
+    [key: string]: string | Node,
+  };
+
+  declare export var FormattedMessageProps: {
+    id: string,
+    defaultMessage?: string,
+  };
+}
