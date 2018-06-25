@@ -1,12 +1,6 @@
-export Intl from './Intl';
-export IntlProvider from './IntlProvider';
-export FormattedMessage from './FormattedMessage';
-export FormattedNumber from './FormattedNumber';
-export FormattedDate from './FormattedDate';
-export FormattedTime from './FormattedTime';
-export FormattedRelative from './FormattedRelative';
-export injectIntl from './injectIntl';
-export IntlConsumer from './IntlConsumer';
-export { defineMessage, defineMessages } from './defineMessages';
-export { addLocaleData } from './addLocaleData';
-export { intlShape, contextShape } from './intlShape';
+import IntlProvider from './components/IntlProvider';
+import { IntlConsumer } from './IntlContext';
+import Translate from './components/Translate';
+import Format from './components/Format';
+
+export { IntlProvider, IntlConsumer, Translate, Format };

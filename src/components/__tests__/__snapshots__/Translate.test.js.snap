@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Translate /> translate message with react components as values 1`] = `
+Array [
+  "Hello ",
+  <b>
+    Kai Hao
+  </b>,
+  ", Welcome to ",
+  <a
+    href="https://17.live"
+  >
+    17live
+  </a>,
+  "!",
+]
+`;

@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
-import { createContext } from 'react-broadcast';
+import { createContext } from 'react';
 
 const { Provider, Consumer } = createContext();
 
-export { Provider, Consumer };
+export { Provider, Consumer as IntlConsumer };
