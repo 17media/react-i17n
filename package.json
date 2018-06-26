@@ -8,8 +8,9 @@
     "src"
   ],
   "scripts": {
-    "start": "webpack-dev-server --config ./demo/webpack.config.js --mode development",
+    "start": "cross-env BABEL_ENV=demo webpack-dev-server --config ./demo/webpack.config.js --mode development --hot",
     "build-locale": "node scripts/build-locale",
+    "prebuild": "npm run build-locale",
     "postbuild": "npm run bundlesize",
     "test": "jest",
     "bundlesize": "bundlesize",
@@ -38,6 +39,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "bundlesize": "^0.17.0",
+    "cross-env": "^5.2.0",
     "flow-bin": "0.75.0",
     "formatjs-extract-cldr-data": "4.1.0",
     "html-webpack-plugin": "^3.2.0",
@@ -48,6 +50,7 @@
     "prettier": "1.10.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
+    "react-hot-loader": "^4.3.3",
     "react-test-renderer": "^16.4.1",
     "rimraf": "^2.6.2",
     "serialize-javascript": "^1.5.0",

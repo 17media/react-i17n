@@ -3,5 +3,12 @@
     "env",
     "react",
     "stage-0"
-  ]
+  ],
+  "env": {
+    "demo": {
+      "plugins": [
+        "react-hot-loader/babel"
+      ]
+    }
+  }
 }

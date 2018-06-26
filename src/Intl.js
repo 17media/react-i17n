@@ -12,6 +12,15 @@ const getDateTimeFormatter = memoizeFormatConstructor(
 );
 
 class Intl {
+  static addLocaleData(localeData) {
+    [].concat(localeData).forEach(data => {
+      if (data && data.locale) {
+        IntlMessageFormat.__addLocaleData(data);
+        IntlRelativeFormat.__addLocaleData(data);
+      }
+    });
+  }
+
   constructor(locale, messages) {
     this.locale = locale;
     this.messages = messages;
@@ -23,15 +32,6 @@ class Intl {
 
   updateMessages = updater => {
     this.messages = updater(this.messages);
-  };
-
-  addLocaleData = localeData => {
-    [].concat(localeData).forEach(data => {
-      if (data && data.locale) {
-        IntlMessageFormat.__addLocaleData(data);
-        IntlRelativeFormat.__addLocaleData(data);
-      }
-    });
   };
 
   formatMessage(id, { defaultMessage, values = {} }) {
