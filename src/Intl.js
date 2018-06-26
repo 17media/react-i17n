@@ -1,9 +1,11 @@
 import { isValidElement } from 'react';
 import IntlMessageFormat from 'intl-messageformat';
+import IntlRelativeFormat from 'intl-relativeformat';
 import memoizeFormatConstructor from 'intl-format-cache';
 import { TOKEN_PREFIX, getRandomID } from './utils';
 
 const getMessageFormatter = memoizeFormatConstructor(IntlMessageFormat);
+const getRelativeFormatter = memoizeFormatConstructor(IntlRelativeFormat);
 const getNumberFormatter = memoizeFormatConstructor(global.Intl.NumberFormat);
 const getDateTimeFormatter = memoizeFormatConstructor(
   global.Intl.DateTimeFormat
@@ -21,6 +23,15 @@ class Intl {
 
   updateMessages = updater => {
     this.messages = updater(this.messages);
+  };
+
+  addLocaleData = localeData => {
+    [].concat(localeData).forEach(data => {
+      if (data && data.locale) {
+        IntlMessageFormat.__addLocaleData(data);
+        IntlRelativeFormat.__addLocaleData(data);
+      }
+    });
   };
 
   formatMessage(id, { defaultMessage, values = {} }) {
@@ -70,6 +81,10 @@ class Intl {
 
   formatDateTime(value, options) {
     return getDateTimeFormatter(this.locale, options).format(value);
+  }
+
+  formatRelative(value, options) {
+    return getRelativeFormatter(this.locale, options).format(value);
   }
 }
 

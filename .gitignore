@@ -1,9 +1,8 @@
 /coverage
-/demo/dist
-/es
-/lib
+build
 /node_modules
-/umd
+dist
 locale-data/
 npm-debug.log*
 yarn-error.log
+.cache
