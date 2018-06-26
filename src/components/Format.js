@@ -7,8 +7,8 @@ const Format = ({ children: value, ...props }) => (
     {intl => {
       if (typeof value === 'number') {
         return intl.formatNumber(value, props);
-      } else if (value instanceof global.Date || Date.parse(value)) {
-        return intl.formatDateTime(value, props);
+      } else if (Date.parse(value)) {
+        return intl.formatDateTime(new Date(Date.parse(value)), props);
       } else if (typeof value === 'string') {
         return <Translate {...props}>{value}</Translate>;
       }
