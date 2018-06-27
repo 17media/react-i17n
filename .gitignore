@@ -2,6 +2,7 @@
 build
 /node_modules
 dist
+lib
 locale-data/
 npm-debug.log*
 yarn-error.log
