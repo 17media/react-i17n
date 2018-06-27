@@ -5,7 +5,9 @@
   "main": "src/index.js",
   "module": "src/index.js",
   "files": [
-    "src"
+    "src",
+    "dist",
+    "locale-data"
   ],
   "scripts": {
     "start": "cross-env BABEL_ENV=demo NODE_ENV=development webpack-dev-server --config ./demo/webpack.config.js --mode development --hot",
