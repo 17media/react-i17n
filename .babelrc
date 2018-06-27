@@ -1,6 +1,8 @@
 {
   "presets": [
-    "env",
+    ["env", {
+      "modules": false
+    }],
     "react",
     "stage-0"
   ],
@@ -8,6 +10,11 @@
     "demo": {
       "plugins": [
         "react-hot-loader/babel"
+      ]
+    },
+    "build": {
+      "plugins": [
+        "external-helpers"
       ]
     }
   }
